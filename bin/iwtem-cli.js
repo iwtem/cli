@@ -10,6 +10,9 @@ process.on('unhandledRejection', (err) => {
 // 2. 检查 NodeJS 版本
 require('../lib/utils/check-node-version')();
 
+// 3. 加载 .env 文件
+require('dotenv').config();
+
 const { program } = require('commander');
 
 const paths = require('../lib/paths');
@@ -21,7 +24,7 @@ program
   .option('-y, --yes', 'use default values')
   .option('-f, --force', 'overwrite target directory if it exist')
   .action((name, options) => {
-    require('../lib/init')(name, options);
+    require('../lib/command/init')(name, options);
   });
 
 program
@@ -29,7 +32,7 @@ program
   .description('create a new project')
   .option('-f, --force', 'overwrite target directory if it exist')
   .action((name, options) => {
-    require('../lib/create')(name, options);
+    require('../lib/command/create')(name, options);
   });
 
 program
@@ -43,7 +46,7 @@ program
   });
 
 program.on('--help', () => {
-  require('../lib/help')();
+  require('../lib/command/help')();
 });
 
 program.version(`v${pkg.version}`).usage('<command> [option]');
