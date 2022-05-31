@@ -17,3 +17,4 @@
 | cross-spawn       | 支持跨平台调用系统上的命令                            |
 | @octokit/core     | 调用 GitHub 的 Rest APIs                    |
 | dotenv            | 读取 .env 文件中的环境变量                         |
+| semver            | 校验 npm 版本是否符合规范                          |
