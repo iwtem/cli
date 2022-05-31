@@ -11,7 +11,8 @@ process.on('unhandledRejection', (err) => {
 require('../lib/utils/check-node-version')();
 
 // 3. 加载 .env 文件
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const { program } = require('commander');
 const pkg = require('../package.json');
