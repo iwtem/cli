@@ -14,9 +14,7 @@ require('../lib/utils/check-node-version')();
 require('dotenv').config();
 
 const { program } = require('commander');
-
-const paths = require('../lib/paths');
-const pkg = require(paths.appPackageJson);
+const pkg = require('../package.json');
 
 program
   .command('init')
