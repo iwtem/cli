@@ -27,7 +27,26 @@ program
   });
 
 program
-  .command('create <app-name>')
+  .command('upgrade')
+  .description('new version for current projects')
+  .argument('[givenVersion]', 'specify the upgraded version number')
+  .argument('[prereleaseId]', 'prerelease id')
+  .option('--patch', 'upgrade patch version')
+  .option('--prepatch', 'upgrade prepatch version')
+  .option('--minor', 'upgrade minor version')
+  .option('--premajor', 'upgrade premajor version')
+  .option('--major', 'upgrade major version')
+  .option('--premajor', 'upgrade premajor version')
+  .option('--prerelease', 'upgrade prerelease version')
+  .action((givenVersion, prereleaseId, options) => {
+    require('../lib/command/upgrade')(givenVersion, prereleaseId, options).then((code) => {
+      process.exit(code);
+    });
+  });
+
+program
+  .command('create')
+  .argument('<app-name>', 'application name')
   .description('create a new project')
   .option('-f, --force', 'overwrite target directory if it exist')
   .action((name, options) => {
