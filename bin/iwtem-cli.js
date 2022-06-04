@@ -30,7 +30,6 @@ program
   .command('upgrade')
   .description('new version for current projects')
   .argument('[givenVersion]', 'specify the upgraded version number')
-  .argument('[prereleaseId]', 'prerelease id')
   .option('--patch', 'upgrade patch version')
   .option('--prepatch', 'upgrade prepatch version')
   .option('--minor', 'upgrade minor version')
@@ -38,8 +37,9 @@ program
   .option('--major', 'upgrade major version')
   .option('--premajor', 'upgrade premajor version')
   .option('--prerelease', 'upgrade prerelease version')
-  .action((givenVersion, prereleaseId, options) => {
-    require('../lib/command/upgrade')(givenVersion, prereleaseId, options).then((code) => {
+  .option('--release', 'is it a release version')
+  .action((givenVersion, options) => {
+    require('../lib/command/upgrade')(givenVersion, options).then((code) => {
       process.exit(code);
     });
   });
