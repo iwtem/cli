@@ -7,6 +7,15 @@
     "react"
   ],
   "description": "快速创建项目",
+  "homepage": "https://github.com/iwtem/cli#README.md",
+  "bugs": {
+    "url": "https://github.com/iwtem/cli/issues",
+    "email": "iwtem@aliyun.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iwtem/cli"
+  },
   "bin": {
     "iwtem": "bin/iwtem-cli.js"
   },
