@@ -3,8 +3,8 @@
 name: Release and npm publish
 on:
   push:
-    tags:
-      - v*.*.*
+    branches:
+      - master
 
 jobs:
   release_publish:
