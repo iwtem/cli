@@ -1,0 +1,33 @@
+# 发布 Release 版本
+
+name: Release
+on:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  release_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: yarn
+          registry-url: https://registry.npmjs.org
+
+      - name: yarn install
+        run: yarn install --frozen-lockfile
+
+      - uses: iwtem-actions/release@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          trigger: 'tag'
+          changelogs: 'CHANGELOG.md'
+          branch: 'master'
