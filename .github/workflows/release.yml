@@ -11,6 +11,8 @@ on:
 
 jobs:
   release:
+    needs:
+      - test
     name: release
     runs-on: ubuntu-latest
     steps:
@@ -23,7 +25,7 @@ jobs:
         with:
           cache: npm
           node-version: 16
-      - run: npm ci
+      - run: npm install
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
