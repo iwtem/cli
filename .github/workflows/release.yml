@@ -3,31 +3,28 @@
 name: Release
 on:
   push:
-    tags:
-      - v*.*.*
+    branches:
+      - master
+      - next
+      - beta
+      - "*.x"
 
 jobs:
-  release_publish:
+  release:
+    name: release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
-          cache: yarn
-          registry-url: https://registry.npmjs.org
-
-      - name: yarn install
-        run: yarn install --frozen-lockfile
-
-      - uses: iwtem-actions/release@master
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          trigger: 'tag'
-          changelogs: 'CHANGELOG.md'
-          branch: 'master'
+          cache: npm
+          node-version: 16
+      - run: npm ci
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
